@@ -1,0 +1,23 @@
+#include "DHT.h"
+#include "Wire.h"
+#define DHTPIN 2
+#define DHTTYPE DHT11
+DHT dht(DHTPIN, DHTTYPE);
+const int SLAVE_ADDRESS=1;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("DHTxx test!");
+//  Wire.begin(SLAVE_ADDRESS);
+  Wire.onRequest(requestEvent);
+  dht.begin();
+}
+
+void loop() {
+}
+
+void requestEvent(){
+  float h = dht.readHumidity();
+  DHT.read11(DHTPIN);
+  Wire.write((char)dht.readHumidity());
+}
